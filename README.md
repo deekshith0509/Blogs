@@ -92,7 +92,7 @@ For questions or feedback, feel free to reach out to me.
    - Inspiration: Thanks to the open-source community for continuous learning.
 
  >>> **Feel free to clone, modify, and contribute to this project!**
-# 📊 Pros and Cons of the Blogs Project
+# 📊 Cons of this Project
 
 
 
