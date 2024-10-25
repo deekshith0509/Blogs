@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram Message Hub Blog</title>
+  <!-- Marked.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.1.3/marked.min.js" defer></script>
+  <script defer data-project="66f410399b5451efb1a541be"
+src="https://cdn.jsdelivr.net/gh/litlyx/litlyx-js/browser/litlyx.js">
+</script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #007BFF;
+      transition: color 0.3s ease;
+    }
+
+    h1:hover {
+      color: #0056b3;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .card-header {
+      padding: 1rem;
+      border-bottom: 1px solid var(--card-border);
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--header-start) 0%, var(--header-end) 100%);
+      color: #fff;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+
+    .card-body {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+
+    .page-content {
+      padding: 1.5rem;
+      border: 1px solid var(--card-border);
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      max-height: 80vh;
+      overflow-y: auto;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    #back-button {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    #back-button:hover {
+      color: var(--link-hover-color);
+    }
+
+    .theme-switch {
+      position: fixed;
+      top: 0.4rem;
+      right: 0.7rem;
+      background: var(--switch-bg);
+      border: 1px solid var(--switch-border);
+      border-radius: 20px;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      
+      transition: background 0.3s ease;
+    }
+
+    .theme-switch input {
+      display: none;
+    }
+
+    .theme-switch .slider {
+      position: relative;
+      width: 34px;
+      height: 20px;
+      background: var(--switch-slider-bg);
+      border-radius: 15px;
+      transition: background 0.3s ease;
+	  cursor: pointer;
+    }
+
+    .theme-switch .slider::before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--switch-thumb);
+      transition: transform 0.3s ease;
+      transform: translateX(2px);
+    }
+
+    .theme-switch input:checked + .slider {
+      background: var(--switch-slider-checked-bg);
+    }
+
+    .theme-switch input:checked + .slider::before {
+      transform: translateX(18px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Light Mode Styles */
+    :root {
+      --card-bg: #fff;
+      --card-border: #ddd;
+      --header-start: #007BFF;
+      --header-end: #00d2ff;
+      --link-color: #007BFF;
+      --link-hover-color: #0056b3;
+      --switch-bg: #f4f4f4;
+      --switch-border: #ddd;
+      --switch-slider-bg: #ccc;
+      --switch-thumb: #fff;
+      --switch-slider-checked-bg: #007BFF;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .card {
+      background-color: #333;
+      border: 1px solid #444;
+    }
+
+    body.dark-mode .page-content {
+      background-color: #333;
+      border: 1px solid #444;
+    }
+
+    body.dark-mode #back-button {
+      color: #1e90ff;
+    }
+
+    body.dark-mode :root {
+      --card-bg: #333;
+      --card-border: #444;
+      --header-start: #1e90ff;
+      --header-end: #00d2ff;
+      --link-color: #1e90ff;
+      --link-hover-color: #0056b3;
+      --switch-bg: #333;
+      --switch-border: #444;
+      --switch-slider-bg: #555;
+      --switch-thumb: #333;
+      --switch-slider-checked-bg: #1e90ff;
+    }
+
+    /* Hide and show sections */
+    .hidden {
+      display: none;
+    }
+	
+	
+	/* Light Mode Styles */
+a {
+  color: #0071ea; /* Default link color */
+  text-decoration: underline dotted;
+}
+
+a:hover, a:focus {
+  color: red; /* Darker color on hover/focus */
+  text-decoration: underline;
+}
+
+/* Dark Mode Styles */
+body.dark-mode a {
+  color: #0071ea; /* Light gray color for links in dark mode */
+  text-decoration: underline dotted #0071ea;
+}
+
+body.dark-mode a:hover, body.dark-mode a:focus {
+  color: red; /* Lighter gray color on hover/focus in dark mode */
+  text-decoration: underline;
+}
+    
+    
+    
+/* Tablet Devices (min-width: 768px) */
+@media (max-width: 768px) {
+
+
+  .container {
+    top: 1.2rem;
+    padding: 1rem;
+    margin: auto;
+  }
+
+
+  .page-content {
+    top: 2rem; 
+    padding : 1rem;
+    
+  }
+}
+
+    
+  </style>
+</head>
+<body>
+  <div id="app" class="container">
+    <!-- Theme Switch -->
+    <div class="theme-switch">
+      <input type="checkbox" id="theme-toggle">
+      <label for="theme-toggle" class="slider"></label>
+    </div>
+
+    <!-- Main Page -->
+    <div id="main-page">
+      <h1>Telegram Message Hub Blog</h1>
+      <div id="blog-cards"></div>
+    </div>
+
+    <!-- Blog Detail -->
+    <div id="blog-detail" class="hidden">
+      <a id="back-button" href="#">Back to Main Page</a>
+      <div id="markdown-content" class="page-content"></div>
+    </div>
+  </div>
+
+<script>
+  const GITHUB_REPO = 'deekshith0509/Blogs';
+  const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_REPO}/contents/`;
+
+  let markdownFiles = [];
+  const themeToggle = document.getElementById('theme-toggle');
+
+  function applyTheme(isDarkMode) {
+    document.body.classList.toggle('dark-mode', isDarkMode);
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    themeToggle.checked = isDarkMode;
+  }
+
+  function initTheme() {
+    const storedTheme = localStorage.getItem('theme');
+    const isDarkMode = storedTheme === 'dark';
+    applyTheme(isDarkMode);
+  }
+
+  function handleThemeToggle() {
+    const isDarkMode = themeToggle.checked;
+    applyTheme(isDarkMode);
+  }
+
+  async function fetchMarkdownFiles() {
+    try {
+      const response = await fetch(GITHUB_API_URL);
+      if (!response.ok) throw new Error('Network response was not ok.');
+      const data = await response.json();
+      markdownFiles = data.filter(file => file.name.endsWith('.md'));
+      displayCards(markdownFiles);
+      handleInitialHash(); // Handle URL hash after fetching files
+    } catch (error) {
+      console.error('Error fetching Markdown files:', error);
+    }
+  }
+
+  async function fetchMarkdown(url) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Network response was not ok.');
+      return await response.text();
+    } catch (error) {
+      console.error('Error fetching Markdown content:', error);
+      return '';
+    }
+  }
+
+  function displayCards(files) {
+    const blogCards = document.getElementById('blog-cards');
+    blogCards.innerHTML = files.map(file => `
+      <div class="card">
+        <div class="card-header">${file.name.replace('.md', '')}</div>
+        <div class="card-body">
+          <a href="#${file.name.replace('.md', '')}" data-url="${file.download_url}">Read More</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function displayBlogContent(content) {
+    const markdownContent = document.getElementById('markdown-content');
+    markdownContent.innerHTML = marked(content);
+  }
+
+  function showBlogDetail(url) {
+    document.getElementById('main-page').classList.add('hidden');
+    document.getElementById('blog-detail').classList.remove('hidden');
+    fetchMarkdown(url).then(content => {
+      displayBlogContent(content);
+      window.history.pushState({ url: url, content: content }, '', `#${url.split('/').pop().replace('.md', '')}`);
+    });
+  }
+
+  function showMainPage() {
+    document.getElementById('main-page').classList.remove('hidden');
+    document.getElementById('blog-detail').classList.add('hidden');
+    window.history.pushState({}, '', '/');
+  }
+
+  function handleCardClick(event) {
+    if (event.target.tagName === 'A') {
+      event.preventDefault(); // Prevent default link behavior
+      const filename = event.target.getAttribute('href').substring(1) + '.md';
+      const file = markdownFiles.find(f => f.name === filename);
+      if (file) {
+        showBlogDetail(file.download_url);
+      }
+    }
+  }
+
+  function handleBackButtonClick(event) {
+    event.preventDefault(); // Prevent default link behavior
+    showMainPage();
+  }
+
+  function handleInitialHash() {
+    const hash = window.location.hash.substring(1) + '.md';
+    const file = markdownFiles.find(f => f.name === hash);
+    if (file) {
+      showBlogDetail(file.download_url);
+    } else {
+      showMainPage();
+    }
+  }
+
+  function handlePopState(event) {
+    console.log('Popstate event:', event.state);
+    if (event.state && event.state.content) {
+      displayBlogContent(event.state.content);
+      document.getElementById('main-page').classList.add('hidden');
+      document.getElementById('blog-detail').classList.remove('hidden');
+    } else {
+      showMainPage();
+    }
+  }
+
+  function init() {
+    initTheme(); // Apply the saved theme
+    fetchMarkdownFiles();
+    document.getElementById('blog-cards').addEventListener('click', handleCardClick);
+    document.getElementById('back-button').addEventListener('click', handleBackButtonClick);
+    themeToggle.addEventListener('change', handleThemeToggle);
+    window.addEventListener('popstate', handlePopState); // Handle back/forward navigation
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof marked === 'function') {
+      init();
+    } else {
+      console.error('Marked.js is not loaded. Please check the script source.');
+    }
+  });
+</script>
+
+</body>
+</html>
